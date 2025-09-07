@@ -2,9 +2,8 @@
   "name": "portfolio",
   "private": true,
   "version": "0.0.0",
-  
-   "type": "module",
-  
+  "homepage": "https://oshenkarunathilaka.github.io/My-Portfolio",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
