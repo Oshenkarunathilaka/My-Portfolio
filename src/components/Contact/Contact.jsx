@@ -1,258 +1,338 @@
 import React, { useState, useEffect } from "react";
 import "./contact.css";
-import { FaFacebookF, FaWhatsapp, FaLinkedinIn, FaGithub, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
 const Contact = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+  const [sectionLoaded, setSectionLoaded] = useState(false);
+  const [formFields, setFormFields] = useState({
+    fullName: '',
+    emailAddress: '',
+    phoneNumber: '',
+    projectBudget: '',
+    messageContent: ''
   });
-  const [focusedField, setFocusedField] = useState(null);
+  const [fieldStates, setFieldStates] = useState({
+    fullName: false,
+    emailAddress: false,
+    phoneNumber: false,
+    projectBudget: false,
+    messageContent: false
+  });
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formSuccess, setFormSuccess] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const sectionObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setSectionLoaded(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.2 }
     );
 
-    const contactSection = document.querySelector('.contact');
-    if (contactSection) {
-      observer.observe(contactSection);
+    const contactElement = document.querySelector('.contact-portfolio-section');
+    if (contactElement) {
+      sectionObserver.observe(contactElement);
     }
 
-    return () => observer.disconnect();
+    return () => sectionObserver.disconnect();
   }, []);
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
+  const handleFieldChange = (e) => {
+    setFormFields({
+      ...formFields,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleInputFocus = (fieldName) => {
-    setFocusedField(fieldName);
+  const handleFieldFocus = (fieldName) => {
+    setFieldStates({
+      ...fieldStates,
+      [fieldName]: true
+    });
   };
 
-  const handleInputBlur = () => {
-    setFocusedField(null);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // You can add your form submission logic here
-  };
-
-  const contactInfo = [
-    {
-      icon: <FaEnvelope />,
-      label: "Email",
-      value: "oshen@example.com",
-      link: "mailto:oshen@example.com"
-    },
-    {
-      icon: <FaPhone />,
-      label: "Phone",
-      value: "+94 77 123 4567",
-      link: "tel:+94771234567"
-    },
-    {
-      icon: <FaMapMarkerAlt />,
-      label: "Location",
-      value: "Sri Lanka",
-      link: null
+  const handleFieldBlur = (fieldName) => {
+    if (!formFields[fieldName]) {
+      setFieldStates({
+        ...fieldStates,
+        [fieldName]: false
+      });
     }
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setFormSubmitting(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      console.log('Project inquiry submitted:', formFields);
+      setFormSubmitting(false);
+      setFormSuccess(true);
+      
+      // Reset success message after 3 seconds
+      setTimeout(() => {
+        setFormSuccess(false);
+      }, 3000);
+    }, 2000);
+  };
+
+  const projectBudgets = [
+    "Less than $5,000",
+    "$5,000 - $10,000",
+    "$10,000 - $25,000",
+    "$25,000 - $50,000",
+    "$50,000+"
   ];
 
-  const socialLinks = [
+  const businessInfo = [
     {
-      icon: <FaFacebookF />,
-      name: "Facebook",
-      url: "https://facebook.com/",
-      color: "#1877f2"
+      iconSymbol: "💼",
+      infoTitle: "Business Email",
+      infoDetails: "contact@oshen.dev",
+      actionLink: "mailto:contact@oshen.dev"
     },
     {
-      icon: <FaWhatsapp />,
-      name: "WhatsApp",
-      url: "https://wa.me/947XXXXXXXX",
-      color: "#25d366"
+      iconSymbol: "🎯",
+      infoTitle: "Project Consultation",
+      infoDetails: "+94 77 123 4567",
+      actionLink: "tel:+94771234567"
     },
     {
-      icon: <FaLinkedinIn />,
-      name: "LinkedIn",
-      url: "https://linkedin.com/in/",
-      color: "#0077b5"
-    },
-    {
-      icon: <FaGithub />,
-      name: "GitHub",
-      url: "https://github.com/",
-      color: "#333"
+      iconSymbol: "⏰",
+      infoTitle: "Response Time",
+      infoDetails: "Within 24 hours",
+      actionLink: null
     }
   ];
 
   return (
-    <section className={`contact ${isVisible ? 'animate' : ''}`}>
-      <div className="contact-background">
-        <div className="background-gradient"></div>
-        <div className="floating-shapes">
-          <div className="shape shape-1"></div>
-          <div className="shape shape-2"></div>
-          <div className="shape shape-3"></div>
-          <div className="shape shape-4"></div>
+    <section className="contact-portfolio-section">
+      <div className="portfolio-background-effects">
+        <div className="mesh-gradient-1"></div>
+        <div className="mesh-gradient-2"></div>
+        <div className="mesh-gradient-3"></div>
+        <div className="geometric-pattern">
+          <div className="pattern-grid">
+            {[...Array(50)].map((_, i) => (
+              <div key={i} className={`grid-dot dot-${i}`}></div>
+            ))}
+          </div>
         </div>
-        <div className="connection-lines">
-          <svg className="lines-svg" viewBox="0 0 100 100">
-            <path className="line line-1" d="M10,20 Q50,5 90,30" />
-            <path className="line line-2" d="M15,60 Q50,40 85,70" />
-            <path className="line line-3" d="M20,80 Q50,95 80,85" />
-          </svg>
+        <div className="floating-orbs">
+          <div className="orb orb-1"></div>
+          <div className="orb orb-2"></div>
+          <div className="orb orb-3"></div>
         </div>
       </div>
 
-      <div className="contact-container">
-        {/* Section Header */}
-        <div className="section-header">
-          <span className="section-number">04</span>
-          <h2 className="section-title">Contact Me</h2>
-          <div className="section-line"></div>
-        </div>
-
-        <div className="contact-intro">
-          <p>Let's collaborate and bring your ideas to life. I'm always excited to work on new projects and connect with fellow creators.</p>
-        </div>
-
-        <div className="contact-content">
-          {/* Contact Info */}
-          <div className="contact-info">
-            <div className="info-header">
-              <h3>Get In Touch</h3>
-              <p>Feel free to reach out through any of these channels</p>
+      <div className="portfolio-content-wrapper">
+        <div className={`portfolio-main-content ${sectionLoaded ? 'content-loaded' : ''}`}>
+          
+          {/* Premium Header */}
+          <div className="portfolio-header-section">
+            <div className="header-badge">
+              <span className="badge-text">Let's Collaborate</span>
+              <div className="badge-glow"></div>
             </div>
-            
-            <div className="info-cards">
-              {contactInfo.map((info, index) => (
-                <div key={index} className="info-card" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <div className="info-icon">
-                    {info.icon}
-                  </div>
-                  <div className="info-content">
-                    <span className="info-label">{info.label}</span>
-                    {info.link ? (
-                      <a href={info.link} className="info-value">{info.value}</a>
-                    ) : (
-                      <span className="info-value">{info.value}</span>
-                    )}
+            <h1 className="portfolio-main-heading">
+              Start Your Next
+              <span className="heading-highlight"> Project</span>
+            </h1>
+            <div className="header-description">
+              <p>Ready to transform your ideas into digital reality? Let's discuss your vision and create something extraordinary together.</p>
+            </div>
+            <div className="header-divider">
+              <div className="divider-line"></div>
+              <div className="divider-center"></div>
+              <div className="divider-line"></div>
+            </div>
+          </div>
+
+          {/* Business Information */}
+          <div className="business-info-section">
+            <div className="info-cards-container">
+              {businessInfo.map((info, index) => (
+                <div key={index} className="business-info-card" style={{ animationDelay: `${index * 0.15}s` }}>
+                  <div className="business-card-inner">
+                    <div className="business-icon-wrapper">
+                      <span className="business-icon">{info.iconSymbol}</span>
+                      <div className="icon-pulse"></div>
+                    </div>
+                    <div className="business-info-content">
+                      <h3 className="business-info-title">{info.infoTitle}</h3>
+                      {info.actionLink ? (
+                        <a href={info.actionLink} className="business-info-detail">{info.infoDetails}</a>
+                      ) : (
+                        <p className="business-info-detail">{info.infoDetails}</p>
+                      )}
+                    </div>
+                    <div className="card-hover-effect"></div>
                   </div>
                 </div>
               ))}
             </div>
+          </div>
 
-            {/* Social Links */}
-            <div className="social-section">
-              <h4>Connect with me</h4>
-              <div className="social-icons">
-                {socialLinks.map((social, index) => (
-                  <a 
-                    key={index}
-                    href={social.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="social-icon"
-                    style={{ 
-                      animationDelay: `${index * 0.1}s`,
-                      '--social-color': social.color 
-                    }}
-                    title={social.name}
+          {/* Project Form */}
+          <div className="project-form-container">
+            <div className="form-wrapper-card">
+              <div className="form-header-content">
+                <h2 className="form-section-title">Project Details</h2>
+                <p className="form-section-subtitle">Tell me about your project and let's bring it to life</p>
+              </div>
+
+              {formSuccess && (
+                <div className="success-notification">
+                  <div className="success-icon">✨</div>
+                  <div className="success-content">
+                    <h4>Message Sent Successfully!</h4>
+                    <p>Thank you for reaching out. I'll get back to you soon.</p>
+                  </div>
+                </div>
+              )}
+
+              <form className="project-inquiry-form" onSubmit={handleFormSubmit}>
+                <div className="form-grid">
+                  <div className="form-field-wrapper">
+                    <div className="input-container">
+                      <input
+                        type="text"
+                        name="fullName"
+                        className={`styled-input ${fieldStates.fullName || formFields.fullName ? 'field-active' : ''}`}
+                        value={formFields.fullName}
+                        onChange={handleFieldChange}
+                        onFocus={() => handleFieldFocus('fullName')}
+                        onBlur={() => handleFieldBlur('fullName')}
+                        required
+                      />
+                      <label className="floating-label">Full Name</label>
+                      <div className="input-highlight"></div>
+                      <div className="field-border"></div>
+                    </div>
+                  </div>
+
+                  <div className="form-field-wrapper">
+                    <div className="input-container">
+                      <input
+                        type="email"
+                        name="emailAddress"
+                        className={`styled-input ${fieldStates.emailAddress || formFields.emailAddress ? 'field-active' : ''}`}
+                        value={formFields.emailAddress}
+                        onChange={handleFieldChange}
+                        onFocus={() => handleFieldFocus('emailAddress')}
+                        onBlur={() => handleFieldBlur('emailAddress')}
+                        required
+                      />
+                      <label className="floating-label">Email Address</label>
+                      <div className="input-highlight"></div>
+                      <div className="field-border"></div>
+                    </div>
+                  </div>
+
+                  <div className="form-field-wrapper">
+                    <div className="input-container">
+                      <input
+                        type="tel"
+                        name="phoneNumber"
+                        className={`styled-input ${fieldStates.phoneNumber || formFields.phoneNumber ? 'field-active' : ''}`}
+                        value={formFields.phoneNumber}
+                        onChange={handleFieldChange}
+                        onFocus={() => handleFieldFocus('phoneNumber')}
+                        onBlur={() => handleFieldBlur('phoneNumber')}
+                      />
+                      <label className="floating-label">Phone Number (Optional)</label>
+                      <div className="input-highlight"></div>
+                      <div className="field-border"></div>
+                    </div>
+                  </div>
+
+                  <div className="form-field-wrapper">
+                    <div className="input-container">
+                      <select
+                        name="projectBudget"
+                        className={`styled-select ${fieldStates.projectBudget || formFields.projectBudget ? 'field-active' : ''}`}
+                        value={formFields.projectBudget}
+                        onChange={handleFieldChange}
+                        onFocus={() => handleFieldFocus('projectBudget')}
+                        onBlur={() => handleFieldBlur('projectBudget')}
+                        required
+                      >
+                        <option value=""></option>
+                        {projectBudgets.map((budget, index) => (
+                          <option key={index} value={budget}>{budget}</option>
+                        ))}
+                      </select>
+                      <label className="floating-label">Project Budget</label>
+                      <div className="input-highlight"></div>
+                      <div className="field-border"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="form-field-wrapper full-width">
+                  <div className="input-container">
+                    <textarea
+                      name="messageContent"
+                      rows="6"
+                      className={`styled-textarea ${fieldStates.messageContent || formFields.messageContent ? 'field-active' : ''}`}
+                      value={formFields.messageContent}
+                      onChange={handleFieldChange}
+                      onFocus={() => handleFieldFocus('messageContent')}
+                      onBlur={() => handleFieldBlur('messageContent')}
+                      required
+                    ></textarea>
+                    <label className="floating-label">Project Description</label>
+                    <div className="input-highlight"></div>
+                    <div className="field-border"></div>
+                  </div>
+                </div>
+
+                <div className="form-submit-section">
+                  <button 
+                    type="submit" 
+                    className={`premium-submit-button ${formSubmitting ? 'button-loading' : ''}`}
+                    disabled={formSubmitting}
                   >
-                    {social.icon}
-                    <div className="social-ripple"></div>
-                  </a>
-                ))}
+                    <span className="button-content">
+                      {formSubmitting ? (
+                        <>
+                          <div className="submit-loader"></div>
+                          <span>Sending Project Inquiry...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="button-text">Send Project Inquiry</span>
+                          <span className="button-icon">🚀</span>
+                        </>
+                      )}
+                    </span>
+                    <div className="button-glow-effect"></div>
+                    <div className="button-shine-effect"></div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          {/* Closing Section */}
+          <div className="portfolio-closing-section">
+            <div className="closing-content">
+              <div className="closing-message">
+                <h3>Ready to Get Started?</h3>
+                <p>Every great project begins with a simple conversation. Let's make something amazing together.</p>
+              </div>
+              <div className="closing-decoration">
+                <div className="decoration-elements">
+                  <span className="element-1"></span>
+                  <span className="element-2"></span>
+                  <span className="element-3"></span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="form-section">
-            <div className="form-header">
-              <h3>Send Message</h3>
-              <p>Have a project in mind? Let's discuss it!</p>
-            </div>
-            
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <input 
-                  type="text" 
-                  name="name"
-                  placeholder="Your Name" 
-                  required 
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  onFocus={() => handleInputFocus('name')}
-                  onBlur={handleInputBlur}
-                  className={focusedField === 'name' ? 'focused' : ''}
-                />
-                <div className="input-line"></div>
-              </div>
-              
-              <div className="form-group">
-                <input 
-                  type="email" 
-                  name="email"
-                  placeholder="Your Email" 
-                  required 
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  onFocus={() => handleInputFocus('email')}
-                  onBlur={handleInputBlur}
-                  className={focusedField === 'email' ? 'focused' : ''}
-                />
-                <div className="input-line"></div>
-              </div>
-              
-              <div className="form-group">
-                <textarea 
-                  rows="5" 
-                  name="message"
-                  placeholder="Your Message" 
-                  required
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  onFocus={() => handleInputFocus('message')}
-                  onBlur={handleInputBlur}
-                  className={focusedField === 'message' ? 'focused' : ''}
-                ></textarea>
-                <div className="input-line"></div>
-              </div>
-              
-              <button type="submit" className="btn-submit">
-                <span className="btn-text">Send Message</span>
-                <div className="btn-background"></div>
-                <div className="btn-shine"></div>
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Footer Message */}
-        <div className="contact-footer">
-          <div className="footer-content">
-            <p>Thank you for visiting my portfolio!</p>
-            <div className="footer-decoration">
-              <span className="decoration-line"></span>
-              <span className="decoration-dot"></span>
-              <span className="decoration-line"></span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
