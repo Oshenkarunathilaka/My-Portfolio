@@ -14,7 +14,7 @@ const About = () => {
       { threshold: 0.1 }
     );
 
-    const aboutSection = document.querySelector('.about-section');
+    const aboutSection = document.querySelector(".about-section");
     if (aboutSection) {
       observer.observe(aboutSection);
     }
@@ -37,7 +37,10 @@ const About = () => {
   };
 
   return (
-    <section className={`about-section ${isVisible ? 'animate' : ''}`}>
+    <section 
+      id="about"   // ✅ this makes navbar link work
+      className={`about-section ${isVisible ? "animate" : ""}`}
+    >
       <div className="about-background">
         <div className="background-grid"></div>
         <div className="floating-elements">
@@ -65,7 +68,7 @@ const About = () => {
                 </div>
                 <h3 className="info-title">Hello, I'm Oshen Karunathilaka</h3>
               </div>
-              
+
               <div className="info-details">
                 <div className="detail-item">
                   <span className="detail-icon">🎓</span>
@@ -80,7 +83,10 @@ const About = () => {
                   <span className="detail-icon">💡</span>
                   <div className="detail-text">
                     <strong>Passion</strong>
-                    <p>Creating digital experiences that blend creativity with functionality. I love turning ideas into reality through design and code.</p>
+                    <p>
+                      Creating digital experiences that blend creativity with functionality.
+                      I love turning ideas into reality through design and code.
+                    </p>
                   </div>
                 </div>
 
@@ -88,7 +94,10 @@ const About = () => {
                   <span className="detail-icon">🚀</span>
                   <div className="detail-text">
                     <strong>Goal</strong>
-                    <p>To become a versatile developer who can bridge the gap between stunning design and robust development.</p>
+                    <p>
+                      To become a versatile developer who can bridge the gap between
+                      stunning design and robust development.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -98,7 +107,7 @@ const About = () => {
           {/* Skills Section */}
           <div className="skills-section">
             <h3 className="skills-title">Skills & Expertise</h3>
-            
+
             <div className="skills-grid">
               {/* Design Skills */}
               <div className="skill-category">
@@ -115,8 +124,8 @@ const About = () => {
                         <span className="skill-percentage">{skill.level}%</span>
                       </div>
                       <div className="skill-bar">
-                        <div 
-                          className="skill-progress" 
+                        <div
+                          className="skill-progress"
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
@@ -140,8 +149,8 @@ const About = () => {
                         <span className="skill-percentage">{skill.level}%</span>
                       </div>
                       <div className="skill-bar">
-                        <div 
-                          className="skill-progress" 
+                        <div
+                          className="skill-progress"
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
@@ -171,7 +180,9 @@ const About = () => {
 
         {/* Call to Action */}
         <div className="about-cta">
-          <p>Ready to bring your ideas to life with creative design and clean code.</p>
+          <p>
+            Ready to bring your ideas to life with creative design and clean code.
+          </p>
           <button className="cta-button">
             <span>Let's Work Together</span>
             <div className="button-hover-effect"></div>
