@@ -53,7 +53,7 @@ const Hero = () => {
           </div>
         </div>
         
-        <div className="hero-visual">
+        {/* <div className="hero-visual">
           <div className="profile-container">
             <div className="profile-ring"></div>
             <div className="profile-image">
@@ -67,7 +67,18 @@ const Hero = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+        <div className="hero-visual">
+  <div className="profile-container">
+    <div className="profile-ring"></div>
+    <div className="profile-image">
+      {/* Replace code snippet with your image */}
+      <img src="./src/images/img 01.png" alt="My Profile" className="profile-pic" />
+    </div>
+  </div>
+</div>
+
+   
       </div>
       
       <div className="scroll-indicator">

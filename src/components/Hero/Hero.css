@@ -352,7 +352,14 @@
 }
 
 /* Hero Visual */
-.hero-visual {
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* .hero-visual {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -436,7 +443,7 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 /* Scroll Indicator */
 .scroll-indicator {
