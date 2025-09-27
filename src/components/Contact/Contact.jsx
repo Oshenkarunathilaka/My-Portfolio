@@ -108,7 +108,7 @@ const Contact = () => {
   ];
 
   return (
-    <section className="contact-portfolio-section">
+    <section className="contact-portfolio-section" id="contact">
       <div className="portfolio-background-effects">
         <div className="mesh-gradient-1"></div>
         <div className="mesh-gradient-2"></div>
@@ -129,7 +129,6 @@ const Contact = () => {
 
       <div className="portfolio-content-wrapper">
         <div className={`portfolio-main-content ${sectionLoaded ? 'content-loaded' : ''}`}>
-          
           {/* Premium Header */}
           <div className="portfolio-header-section">
             <div className="header-badge">
@@ -332,13 +331,10 @@ const Contact = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
   );
 };
-
-
 
 export default Contact;
