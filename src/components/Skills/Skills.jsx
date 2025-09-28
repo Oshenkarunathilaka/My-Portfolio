@@ -15,7 +15,7 @@ const Skills = () => {
       { threshold: 0.1 }
     );
 
-    const skillsSection = document.querySelector('.skills');
+    const skillsSection = document.querySelector("#skills"); // ✅ use id here
     if (skillsSection) {
       observer.observe(skillsSection);
     }
@@ -80,7 +80,8 @@ const Skills = () => {
   };
 
   return (
-    <section className={`skills ${isVisible ? 'animate' : ''}`}>
+    // ✅ added id="skills"
+    <section id="skills" className={`skills ${isVisible ? "animate" : ""}`}>
       <div className="skills-background">
         <div className="background-waves">
           <div className="wave wave-1"></div>
@@ -105,21 +106,26 @@ const Skills = () => {
         </div>
 
         <div className="skills-intro">
-          <p>A comprehensive toolkit of technologies and design skills that I use to bring creative ideas to life.</p>
+          <p>
+            A comprehensive toolkit of technologies and design skills that I use
+            to bring creative ideas to life.
+          </p>
         </div>
 
         {/* Skills Grid */}
         <div className="skills-grid">
           {Object.entries(skillsData).map(([key, skill], index) => (
-            <div 
+            <div
               key={key}
-              className={`skill-card ${skill.color} ${activeSkill === key ? 'active' : ''}`}
+              className={`skill-card ${skill.color} ${
+                activeSkill === key ? "active" : ""
+              }`}
               onMouseEnter={() => handleSkillHover(key)}
               onMouseLeave={handleSkillLeave}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="card-background"></div>
-              
+
               <div className="skill-header">
                 <div className="skill-icon-wrapper">
                   <span className="skill-icon">{skill.icon}</span>
@@ -134,8 +140,8 @@ const Skills = () => {
                 <h4 className="tools-title">Tools & Technologies</h4>
                 <div className="tools-list">
                   {skill.tools.map((tool, toolIndex) => (
-                    <div 
-                      key={toolIndex} 
+                    <div
+                      key={toolIndex}
                       className="tool-item"
                       style={{ animationDelay: `${toolIndex * 0.1}s` }}
                     >
@@ -145,7 +151,7 @@ const Skills = () => {
                         <span className="tool-level">{tool.level}%</span>
                       </div>
                       <div className="progress-bar">
-                        <div 
+                        <div
                           className="progress-fill"
                           style={{ width: `${tool.level}%` }}
                         ></div>
