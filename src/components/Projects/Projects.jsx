@@ -15,7 +15,7 @@ const Projects = () => {
       { threshold: 0.1 }
     );
 
-    const projectsSection = document.querySelector('.projects');
+    const projectsSection = document.querySelector("#projects"); // ✅ use id
     if (projectsSection) {
       observer.observe(projectsSection);
     }
@@ -26,7 +26,8 @@ const Projects = () => {
   const projectsData = {
     "graphic-design": {
       title: "Graphic Design",
-      description: "Creative posters, social media designs, and brand identity projects.",
+      description:
+        "Creative posters, social media designs, and brand identity projects.",
       icon: "🎨",
       color: "purple",
       subProjects: [
@@ -34,27 +35,27 @@ const Projects = () => {
           title: "Social Media Post Design",
           description: "Engaging social media graphics for various platforms",
           tech: ["Adobe Illustrator", "Photoshop"],
-          image: "📱"
+          image: "📱",
         },
         {
           title: "Brand Identity Design",
           description: "Complete brand packages including logos and guidelines",
           tech: ["Illustrator", "Brand Strategy"],
-          image: "🏢"
+          image: "🏢",
         },
         {
           title: "Print Design",
           description: "Posters, brochures, and marketing materials",
           tech: ["Adobe Creative Suite", "Print Design"],
-          image: "📄"
+          image: "📄",
         },
         {
           title: "Digital Illustrations",
           description: "Custom illustrations for web and mobile applications",
           tech: ["Illustrator", "Digital Art"],
-          image: "✨"
-        }
-      ]
+          image: "✨",
+        },
+      ],
     },
     "ui-design": {
       title: "UI Design",
@@ -66,31 +67,32 @@ const Projects = () => {
           title: "Dashboard Design",
           description: "Clean and intuitive dashboard interfaces",
           tech: ["Figma", "Adobe XD", "User Research"],
-          image: "📊"
+          image: "📊",
         },
         {
           title: "Mobile App UI",
           description: "Mobile-first design approach with modern aesthetics",
           tech: ["Figma", "Prototyping", "iOS/Android Guidelines"],
-          image: "📱"
+          image: "📱",
         },
         {
           title: "E-commerce Interface",
           description: "User-centered e-commerce website designs",
           tech: ["UX Research", "Wireframing", "Prototyping"],
-          image: "🛒"
+          image: "🛒",
         },
         {
           title: "Landing Pages",
           description: "High-converting landing page designs",
           tech: ["UI/UX", "Conversion Optimization"],
-          image: "🚀"
-        }
-      ]
+          image: "🚀",
+        },
+      ],
     },
     "web-design": {
       title: "Web Design",
-      description: "Responsive websites built with HTML, CSS, JavaScript & frameworks.",
+      description:
+        "Responsive websites built with HTML, CSS, JavaScript & frameworks.",
       icon: "🌐",
       color: "yellow",
       subProjects: [
@@ -98,27 +100,27 @@ const Projects = () => {
           title: "React Portfolio Websites",
           description: "Modern portfolio websites built with React",
           tech: ["React", "CSS3", "Responsive Design"],
-          image: "⚛️"
+          image: "⚛️",
         },
         {
           title: "Next.js Applications",
           description: "Full-stack web applications with Next.js",
           tech: ["Next.js", "React", "API Integration"],
-          image: "🔥"
+          image: "🔥",
         },
         {
           title: "Business Websites",
           description: "Professional business websites with modern design",
           tech: ["HTML5", "CSS3", "JavaScript"],
-          image: "🏢"
+          image: "🏢",
         },
         {
           title: "Interactive Web Apps",
           description: "Dynamic web applications with smooth animations",
           tech: ["JavaScript", "CSS Animations", "API"],
-          image: "💻"
-        }
-      ]
+          image: "💻",
+        },
+      ],
     },
     "mobile-development": {
       title: "Mobile App Development",
@@ -130,28 +132,28 @@ const Projects = () => {
           title: "Cross-Platform Apps",
           description: "Mobile apps that work on both iOS and Android",
           tech: ["React Native", "Flutter", "Java"],
-          image: "📱"
+          image: "📱",
         },
         {
           title: "Progressive Web Apps",
           description: "Web apps with native mobile app experience",
           tech: ["PWA", "Service Workers", "Web APIs"],
-          image: "🚀"
+          image: "🚀",
         },
         {
           title: "E-commerce Mobile Apps",
           description: "Feature-rich shopping applications",
           tech: ["React Native", "Payment Integration"],
-          image: "🛍️"
+          image: "🛍️",
         },
         {
           title: "Social Media Apps",
           description: "Social networking applications with real-time features",
           tech: ["Real-time Database", "Push Notifications"],
-          image: "💬"
-        }
-      ]
-    }
+          image: "💬",
+        },
+      ],
+    },
   };
 
   const handleProjectClick = (projectId) => {
@@ -159,7 +161,8 @@ const Projects = () => {
   };
 
   return (
-    <section className={`projects ${isVisible ? 'animate' : ''}`}>
+    // ✅ added id="projects"
+    <section id="projects" className={`projects ${isVisible ? "animate" : ""}`}>
       <div className="projects-background">
         <div className="background-mesh"></div>
         <div className="floating-particles">
@@ -179,15 +182,20 @@ const Projects = () => {
         </div>
 
         <div className="projects-intro">
-          <p>Explore my diverse portfolio showcasing creativity, technical skills, and attention to detail across various domains.</p>
+          <p>
+            Explore my diverse portfolio showcasing creativity, technical skills,
+            and attention to detail across various domains.
+          </p>
         </div>
 
         {/* Projects Grid */}
         <div className="projects-grid">
           {Object.entries(projectsData).map(([key, project], index) => (
             <div key={key} className="project-wrapper">
-              <div 
-                className={`project-card ${project.color} ${expandedProject === key ? 'expanded' : ''}`}
+              <div
+                className={`project-card ${project.color} ${
+                  expandedProject === key ? "expanded" : ""
+                }`}
                 onClick={() => handleProjectClick(key)}
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
@@ -196,36 +204,50 @@ const Projects = () => {
                     <span className="icon">{project.icon}</span>
                   </div>
                   <h3 className="project-title">{project.title}</h3>
-                  <div className={`expand-indicator ${expandedProject === key ? 'rotated' : ''}`}>
+                  <div
+                    className={`expand-indicator ${
+                      expandedProject === key ? "rotated" : ""
+                    }`}
+                  >
                     <span>+</span>
                   </div>
                 </div>
-                
+
                 <p className="project-description">{project.description}</p>
-                
+
                 <div className="card-hover-effect"></div>
               </div>
 
               {/* Sub-projects */}
-              <div className={`sub-projects ${expandedProject === key ? 'show' : ''}`}>
+              <div
+                className={`sub-projects ${
+                  expandedProject === key ? "show" : ""
+                }`}
+              >
                 <div className="sub-projects-grid">
                   {project.subProjects.map((subProject, subIndex) => (
-                    <div 
-                      key={subIndex} 
+                    <div
+                      key={subIndex}
                       className="sub-project-card"
                       style={{ animationDelay: `${subIndex * 0.1}s` }}
                     >
                       <div className="sub-project-image">
                         <span className="sub-icon">{subProject.image}</span>
                       </div>
-                      
+
                       <div className="sub-project-content">
-                        <h4 className="sub-project-title">{subProject.title}</h4>
-                        <p className="sub-project-description">{subProject.description}</p>
-                        
+                        <h4 className="sub-project-title">
+                          {subProject.title}
+                        </h4>
+                        <p className="sub-project-description">
+                          {subProject.description}
+                        </p>
+
                         <div className="tech-stack">
                           {subProject.tech.map((tech, techIndex) => (
-                            <span key={techIndex} className="tech-tag">{tech}</span>
+                            <span key={techIndex} className="tech-tag">
+                              {tech}
+                            </span>
                           ))}
                         </div>
                       </div>

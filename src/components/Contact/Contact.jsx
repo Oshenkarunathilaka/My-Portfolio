@@ -90,14 +90,14 @@ const Contact = () => {
     {
       iconSymbol: "💼",
       infoTitle: "Business Email",
-      infoDetails: "contact@oshen.dev",
+      infoDetails: "oshenkarunathilaka@gmail.com",
       actionLink: "mailto:contact@oshen.dev"
     },
     {
       iconSymbol: "🎯",
       infoTitle: "Project Consultation",
-      infoDetails: "+94 77 123 4567",
-      actionLink: "tel:+94771234567"
+      infoDetails: "+94 77 133 5307",
+      actionLink: "tel:+94771335307"
     },
     {
       iconSymbol: "⏰",
